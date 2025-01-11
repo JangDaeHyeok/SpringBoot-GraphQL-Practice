@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true # sql show
+        format_sql: true # pretty show
+    hibernate:
+      ddl-auto: create # db init (create, create-drop, update, validate, none)
+  graphql:
+    schema:
+      locations: graphql/
