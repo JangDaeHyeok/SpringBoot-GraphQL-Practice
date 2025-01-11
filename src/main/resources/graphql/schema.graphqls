@@ -1,0 +1,18 @@
+type Query {
+    # User 정보를 가져오는 쿼리
+    getUsers(request: UserGetRequestDTO!): [UserGetResponseDTO]
+}
+
+# 요청에 사용할 입력 타입
+input UserGetRequestDTO {
+    id: ID
+    name: String
+    age: Int
+}
+
+# 응답으로 반환할 User 타입
+type UserGetResponseDTO {
+    id: ID
+    name: String
+    age: Int
+}
