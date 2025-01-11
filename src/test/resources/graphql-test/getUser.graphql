@@ -1,0 +1,7 @@
+query {
+    getUsers(request: { name: "AAA" }) {
+        id
+        name
+        age
+    }
+}
