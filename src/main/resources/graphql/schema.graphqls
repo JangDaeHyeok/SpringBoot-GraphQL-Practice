@@ -3,11 +3,21 @@ type Query {
     getUsers(request: UserGetRequestDTO!): [UserGetResponseDTO]
 }
 
-# 요청에 사용할 입력 타입
+type Mutation {
+    addUser(request: UserAddRequestDTO!): UserGetResponseDTO
+}
+
+# 사용자 조회 요청에 사용할 입력 타입
 input UserGetRequestDTO {
     id: ID
     name: String
     age: Int
+}
+
+# 사용자 등록 요청에 사용할 입력 타입
+input UserAddRequestDTO {
+    name: String!
+    age: Int!
 }
 
 # 응답으로 반환할 User 타입
