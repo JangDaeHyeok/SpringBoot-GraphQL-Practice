@@ -74,6 +74,21 @@ class UserQueryTest {
                 .containsExactly(20, 30);
     }
 
+    @Test
+    @DisplayName("User 등록 테스트")
+    void addUser_등록_테스트() {
+        graphQlTester.documentName("addUser")
+                .variable("name", "AAA")
+                .variable("age", 20)
+                .execute()
+                .path("addUser.name")
+                .entity(String.class)
+                .isEqualTo("AAA")
+                .path("addUser.age")
+                .entity(Integer.class)
+                .isEqualTo(20);
+    }
+
     /**
      * 테스트 사용자 Entity 생성
      */

@@ -1,0 +1,7 @@
+mutation {
+    addUser(request: {name: "AAA", age: 20}) {
+        id
+        name
+        age
+    }
+}
