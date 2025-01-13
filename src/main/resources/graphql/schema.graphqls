@@ -1,6 +1,10 @@
+# TODO user, board 분리
+
 type Query {
     # User 정보를 가져오는 쿼리
     getUsers(request: UserGetRequestDTO!): [UserGetResponseDTO]
+    # Board 정보를 가져오는 쿼리
+    getBoards(request: BoardGetRequestDTO!): [BoardGetResponseDTO]
 }
 
 type Mutation {
@@ -14,6 +18,14 @@ input UserGetRequestDTO {
     age: Int
 }
 
+# 게시물 조회 요청에 사용할 입력 타입
+input BoardGetRequestDTO {
+    id: ID
+    userId: Int
+    title: String
+    contents: String
+}
+
 # 사용자 등록 요청에 사용할 입력 타입
 input UserAddRequestDTO {
     name: String!
@@ -25,4 +37,12 @@ type UserGetResponseDTO {
     id: ID
     name: String
     age: Int
+}
+
+# 응답으로 반환할 User 타입
+type BoardGetResponseDTO {
+    id: ID
+    userId: Int
+    title: String
+    contents: String
 }
