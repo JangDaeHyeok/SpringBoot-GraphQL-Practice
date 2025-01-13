@@ -1,0 +1,8 @@
+query {
+    getBoards(request: { title: "B" }) {
+        id
+        userId
+        title
+        contents
+    }
+}
