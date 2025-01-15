@@ -9,6 +9,7 @@ type Query {
 
 type Mutation {
     addUser(request: UserAddRequestDTO!): UserGetResponseDTO
+    addBoard(request: BoardAddRequestDTO!): BoardGetResponseDTO
 }
 
 # 사용자 조회 요청에 사용할 입력 타입
@@ -30,6 +31,13 @@ input BoardGetRequestDTO {
 input UserAddRequestDTO {
     name: String!
     age: Int!
+}
+
+# 사용자 등록 요청에 사용할 입력 타입
+input BoardAddRequestDTO {
+    userId: Int!
+    title: String!
+    contents: String!
 }
 
 # 응답으로 반환할 User 타입
