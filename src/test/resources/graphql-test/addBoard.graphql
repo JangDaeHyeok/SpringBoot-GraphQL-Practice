@@ -1,0 +1,8 @@
+mutation {
+    addBoard(request: {userId: 1, title: "test title", contents: "test contents"}) {
+        id
+        userId
+        title
+        contents
+    }
+}
