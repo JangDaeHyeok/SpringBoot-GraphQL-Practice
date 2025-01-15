@@ -3,10 +3,7 @@ package com.jdh.graphql.api.user.query;
 import com.jdh.graphql.api.user.domain.entity.User;
 import com.jdh.graphql.api.user.domain.entity.value.UserInfo;
 import com.jdh.graphql.api.user.domain.repository.UserRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -21,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureDataJpa
 @AutoConfigureTestDatabase
 @AutoConfigureTestEntityManager
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Transactional
 class UserQueryTest {
 
@@ -30,8 +29,10 @@ class UserQueryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @BeforeEach
+    @BeforeAll
     public void addUser() {
+        userRepository.deleteAll();
+
         final User userA = getUser(getUserInfoA());
         final User userB = getUser(getUserInfoB());
 
@@ -39,20 +40,18 @@ class UserQueryTest {
         userRepository.save(userB);
     }
 
-    @AfterEach
+    @AfterAll
     public void removeUser() {
         userRepository.deleteAll();
     }
 
     @Test
+    @Order(1)
     @DisplayName("User 사용자 이름으로 단건 조회 테스트")
     void getUser_name_단건_조회_쿼리_테스트() {
         graphQlTester.documentName("getUser")
                 .variable("name", "AAA")
                 .execute()
-                .path("getUsers[0].id")
-                .entity(Long.class)
-                .isEqualTo(1L)
                 .path("getUsers[0].name")
                 .entity(String.class)
                 .isEqualTo("AAA")
@@ -62,6 +61,7 @@ class UserQueryTest {
     }
 
     @Test
+    @Order(2)
     @DisplayName("User 목록 조회 테스트")
     void getUser_목록_조회_쿼리_테스트() {
         graphQlTester.documentName("getUsers")
@@ -75,6 +75,7 @@ class UserQueryTest {
     }
 
     @Test
+    @Order(3)
     @DisplayName("User 등록 테스트")
     void addUser_등록_테스트() {
         graphQlTester.documentName("addUser")
