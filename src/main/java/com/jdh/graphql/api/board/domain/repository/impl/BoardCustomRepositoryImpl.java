@@ -37,10 +37,10 @@ public class BoardCustomRepositoryImpl implements BoardCustomRepository {
             builder.and(board.userId.userId.eq(userId));
         }
         if (title != null) {
-            builder.and(board.boardInfo.title.eq(title));
+            builder.and(board.boardInfo.title.contains(title));
         }
         if (contents != null) {
-            builder.and(board.boardInfo.contents.eq(contents));
+            builder.and(board.boardInfo.contents.contains(contents));
         }
 
         return builder;
