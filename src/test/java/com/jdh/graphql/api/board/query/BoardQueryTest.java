@@ -4,6 +4,8 @@ import com.jdh.graphql.api.board.domain.entity.Board;
 import com.jdh.graphql.api.board.domain.entity.value.BoardInfo;
 import com.jdh.graphql.api.board.domain.entity.value.UserId;
 import com.jdh.graphql.api.board.domain.repository.BoardRepository;
+import com.jdh.graphql.api.board.dto.request.BoardAddRequestDTO;
+import com.jdh.graphql.api.board.dto.request.BoardGetRequestDTO;
 import com.jdh.graphql.api.user.domain.entity.User;
 import com.jdh.graphql.api.user.domain.entity.value.UserInfo;
 import com.jdh.graphql.api.user.domain.repository.UserRepository;
@@ -59,8 +61,10 @@ class BoardQueryTest {
     @Order(1)
     @DisplayName("Board 게시물 제목으로 단건 조회 테스트")
     void getBoard_title_단건_조회_쿼리_테스트() {
+        final BoardGetRequestDTO request = new BoardGetRequestDTO(null, null, "B", null);
+
         graphQlTester.documentName("getBoard")
-                .variable("title", "B")
+                .variable("request", request)
                 .execute()
                 .path("getBoards[0].id")
                 .entity(Long.class)
@@ -97,10 +101,10 @@ class BoardQueryTest {
     @Order(3)
     @DisplayName("Board 등록 테스트")
     void addBoard_등록_테스트() {
+        final BoardAddRequestDTO request = new BoardAddRequestDTO(1L, "test title", "test contents");
+
         graphQlTester.documentName("addBoard")
-                .variable("userId", 1)
-                .variable("title", "test title")
-                .variable("contents", "test contents")
+                .variable("request", request)
                 .execute()
                 .path("addBoard.userId")
                 .entity(Integer.class)
