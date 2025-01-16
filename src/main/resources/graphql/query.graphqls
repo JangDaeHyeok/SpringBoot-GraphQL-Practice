@@ -1,0 +1,4 @@
+type Query {
+    getUsers(request: UserGetRequestDTO!): [UserGetResponseDTO]
+    getBoards(request: BoardGetRequestDTO!): [BoardGetResponseDTO]
+}

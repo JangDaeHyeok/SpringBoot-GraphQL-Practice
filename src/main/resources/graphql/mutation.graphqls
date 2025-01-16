@@ -1,0 +1,4 @@
+type Mutation {
+    addUser(request: UserAddRequestDTO!): UserGetResponseDTO
+    addBoard(request: BoardAddRequestDTO!): BoardGetResponseDTO
+}

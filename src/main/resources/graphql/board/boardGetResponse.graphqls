@@ -1,0 +1,7 @@
+# 응답으로 반환할 Board 타입
+type BoardGetResponseDTO {
+    id: ID
+    userId: Int
+    title: String
+    contents: String
+}

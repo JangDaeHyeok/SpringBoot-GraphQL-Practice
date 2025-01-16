@@ -1,0 +1,6 @@
+# 게시물 등록 요청에 사용할 입력 타입
+input BoardAddRequestDTO {
+    userId: Int!
+    title: String!
+    contents: String!
+}

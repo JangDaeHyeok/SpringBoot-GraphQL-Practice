@@ -20,4 +20,5 @@ spring:
       ddl-auto: create # db init (create, create-drop, update, validate, none)
   graphql:
     schema:
-      locations: graphql/
+      locations: graphql/**/
+      file-extensions: .graphqls

@@ -1,0 +1,7 @@
+# 게시물 조회 요청에 사용할 입력 타입
+input BoardGetRequestDTO {
+    id: ID
+    userId: Int
+    title: String
+    contents: String
+}

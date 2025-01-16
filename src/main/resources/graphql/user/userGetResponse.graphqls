@@ -1,0 +1,6 @@
+# 응답으로 반환할 User 타입
+type UserGetResponseDTO {
+    id: ID
+    name: String
+    age: Int
+}
