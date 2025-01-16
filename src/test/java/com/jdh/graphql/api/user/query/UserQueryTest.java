@@ -3,6 +3,8 @@ package com.jdh.graphql.api.user.query;
 import com.jdh.graphql.api.user.domain.entity.User;
 import com.jdh.graphql.api.user.domain.entity.value.UserInfo;
 import com.jdh.graphql.api.user.domain.repository.UserRepository;
+import com.jdh.graphql.api.user.dto.request.UserAddRequestDTO;
+import com.jdh.graphql.api.user.dto.request.UserGetRequestDTO;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
@@ -49,8 +51,10 @@ class UserQueryTest {
     @Order(1)
     @DisplayName("User 사용자 이름으로 단건 조회 테스트")
     void getUser_name_단건_조회_쿼리_테스트() {
+        final UserGetRequestDTO request = new UserGetRequestDTO(null, "AAA", null);
+
         graphQlTester.documentName("getUser")
-                .variable("name", "AAA")
+                .variable("request", request)
                 .execute()
                 .path("getUsers[0].name")
                 .entity(String.class)
@@ -78,9 +82,10 @@ class UserQueryTest {
     @Order(3)
     @DisplayName("User 등록 테스트")
     void addUser_등록_테스트() {
+        final UserAddRequestDTO request = new UserAddRequestDTO("AAA", 20);
+
         graphQlTester.documentName("addUser")
-                .variable("name", "AAA")
-                .variable("age", 20)
+                .variable("request", request)
                 .execute()
                 .path("addUser.name")
                 .entity(String.class)
